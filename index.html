@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon E-commerce FACILE</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="nav-container">
+      <button class="burger" aria-label="Menu">&#9776;</button>
+      <ul class="nav-left">
+        <li><a href="#accueil" aria-label="Accueil">ACCUEIL</a></li>
+        <li><a href="#apropos" aria-label="À propos">A PROPOS</a></li>
+      </ul>
+
+      <div class="logo" aria-label="Logo">
+        <img src="images\t-shirt-logo.png" alt="Logo du site" />
+      </div>
+
+      <ul class="nav-right">
+        <li><a href="#produits" aria-label="Produits">SHOP</a></li>
+        <li><a href="#contact" aria-label="Contact">CONTACT</a></li>
+      </ul>
+    </nav>
+    <div class="banner-container">
+      <img src="images\banner2.png" alt="bannière" />
+    </div>
+    <div class="container">
+      <div class="product-card">
+        <div class="product-images">
+          <img
+            id="product-image"
+            src="images\produit-model.jpg"
+            alt="Produit"
+          />
+        </div>
+
+        <div class="product-info">
+          <h1 id="product-name">Chargement...</h1>
+          <p id="product-description"></p>
+
+          <div class="price-display">
+            <span id="product-price">0€</span>
+          </div>
+
+          <div class="size-selector">
+            <label for="sizes">Taille :</label>
+            <select id="sizes">
+              <option value="">Choisir une taille</option>
+            </select>
+          </div>
+
+          <button id="add-to-cart" disabled>Ajouter au panier</button>
+
+          <div id="cart-info" style="display: none">
+            <p>Panier : <span id="cart-count">0</span> article(s)</p>
+            <button id="view-cart">Voir le panier</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
