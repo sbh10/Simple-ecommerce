@@ -101,21 +101,23 @@ nav ul li a:hover {
 .product-info {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  align-items: center; /* ➕ ajouter pour centrer horizontalement */
+  align-items: center;
   text-align: center;
 }
 
 .product-info h1 {
   font-size: 2.5rem;
   color: #4a4a4a;
-  margin-bottom: 10px;
+  margin-bottom: 6px; /* Réduit l’espace sous le titre et le texte */
+  margin-top: 0;
 }
 
 .product-info p {
   font-size: 1.1rem;
   color: #666;
   line-height: 1.8;
+  margin-bottom: 6px; /* Réduit l’espace sous le titre et le texte */
+  margin-top: 0;
 }
 
 .price-display {
@@ -214,6 +216,61 @@ button {
   font-weight: bold;
 }
 
+.modal {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Fond assombri */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+  max-width: 400px;
+  width: 90vw;
+  text-align: center;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Espace horizontal entre les liens */
+  list-style: none;
+  padding: 1rem 0;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: #181818;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .nav-left,
@@ -240,25 +297,25 @@ button {
     height: auto;
     width: auto;
   }
-}
+  .modal-content {
+    transform: scale(0.8); /* Réduit tout à 80% */
+  }
+  .product-info .product-info h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
 
-.product-card {
-  grid-template-columns: 1fr;
-  padding: 20px;
-}
-
-.product-info h1 {
-  font-size: 2rem;
-  text-align: center;
-}
-
-.price-display {
-  font-size: 1.8rem;
-}
-
-button {
-  padding: 12px 20px;
-  font-size: 1rem;
+  .price-display {
+    font-size: 1.8rem;
+  }
+  .product-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  button {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {

@@ -9,10 +9,12 @@
       href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="images\favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <nav class="nav-container">
       <button class="burger" aria-label="Menu">&#9776;</button>
+
       <ul class="nav-left">
         <li><a href="#accueil" aria-label="Accueil">ACCUEIL</a></li>
         <li><a href="#apropos" aria-label="À propos">A PROPOS</a></li>
@@ -27,9 +29,11 @@
         <li><a href="#contact" aria-label="Contact">CONTACT</a></li>
       </ul>
     </nav>
+
     <div class="banner-container">
       <img src="images\banner2.png" alt="bannière" />
     </div>
+
     <div class="container">
       <div class="product-card">
         <div class="product-images">
@@ -37,6 +41,11 @@
             id="product-image"
             src="images\produit-model.jpg"
             alt="Produit"
+          />
+          <img
+            id="product-thumb"
+            alt=""
+            style="max-width: 100px; cursor: pointer"
           />
         </div>
 
@@ -65,6 +74,29 @@
       </div>
     </div>
 
+    <div id="custom-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-message"></p>
+      </div>
+    </div>
+
+    <footer>
+      <ul class="footer">
+        <li>
+          <a href="#mentionslegales" aria-label="Mentions légales"
+            >Mentions légales</a
+          >
+        </li>
+        <li>
+          <a href="#pagecontact" aria-label="Page contact">Contact</a>
+        </li>
+        <li>
+          <a href="#cgv" aria-label="conditions générales de vente">CGV</a>
+        </li>
+      </ul>
+    </footer>
     <script src="js/app.js"></script>
   </body>
 </html>

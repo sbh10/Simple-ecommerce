@@ -106,7 +106,7 @@ class ECommerceApp {
     const viewCartBtn = document.getElementById("view-cart");
     if (viewCartBtn instanceof HTMLButtonElement) {
       viewCartBtn.addEventListener("click", () => {
-        this.showCart();
+        window.location.href = "cart.html";
       });
     }
   }
@@ -240,34 +240,38 @@ class ECommerceApp {
     }
   }
 
-  showCart() {
-    if (this.cart.length === 0) {
-      alert("Votre panier est vide");
-      return;
-    }
-
-    let cartHTML = "VOTRE PANIER:\n\n";
-    let total = 0;
-
-    this.cart.forEach((item) => {
-      const itemTotal = item.price * item.quantity;
-      total += itemTotal;
-      cartHTML += `${item.productName} - Taille ${item.size}\n`;
-      cartHTML += `Quantité: ${item.quantity} x ${item.price}€ = ${itemTotal}€\n\n`;
-    });
-
-    cartHTML += `TOTAL: ${total}€`;
-    alert(cartHTML);
-  }
-
   showError(message) {
-    // Simple alert pour commencer, vous pouvez améliorer plus tard
-    alert("Erreur: " + message);
+    this.showError("Oups, il y a un problème.");
   }
 
   showSuccess(message) {
-    // Simple alert pour commencer, vous pouvez améliorer plus tard
-    alert(message);
+    this.showModal({
+      title: "Dans le panier !",
+      message: "Votre produit a bien été ajouté.",
+    });
+  }
+
+  showModal({ title = "", message = "" }) {
+    const modal = document.getElementById("custom-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalMessage = document.getElementById("modal-message");
+    if (modal && modalTitle && modalMessage) {
+      modalTitle.textContent = title;
+      modalMessage.textContent = message;
+      modal.style.display = "flex";
+
+      const closeBtn = modal.querySelector(".close-btn");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          modal.style.display = "none";
+        });
+      }
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+    }
   }
 }
 

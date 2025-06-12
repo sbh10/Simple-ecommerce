@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/cart.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images\favicon.ico" type="image/x-icon" />
+    <title>Panier E-commerce FACILE</title>
+  </head>
+
+  <body>
+    <header class="header-banner">
+      <div class="banner-container">
+        <img src="images/banner2.png" alt="Bannière" />
+      </div>
+      <div class="logo">
+        <img src="images/t-shirt-logo.png" alt="Logo du site" />
+      </div>
+    </header>
+    <h1>MON PANIER</h1>
+    <div id="cart-items"></div>
+
+    <script>
+      const cart = JSON.parse(localStorage.getItem("ecommerce_cart")) || [];
+      const cartItemsDiv = document.getElementById("cart-items");
+      if (cart.length === 0) {
+        cartItemsDiv.textContent = "Le panier est vide.";
+      } else {
+        let total = 0;
+        cart.forEach((item) => {
+          const itemTotal = item.price * item.quantity;
+          total += itemTotal;
+          const itemDiv = document.createElement("div");
+          itemDiv.textContent = `${item.productName} - Taille ${item.size} | Quantité: ${item.quantity} x ${item.price}€ = ${itemTotal}€`;
+          cartItemsDiv.appendChild(itemDiv);
+        });
+        const totalDiv = document.createElement("div");
+        totalDiv.textContent = `TOTAL: ${total}€`;
+        cartItemsDiv.appendChild(totalDiv);
+      }
+    </script>
+  </body>
+</html>
