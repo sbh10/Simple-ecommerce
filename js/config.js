@@ -1,0 +1,2 @@
+const STRIPE_PUBLIC_KEY =
+  "pk_test_51RaL4cPrVQeiSsdTbYWPcJ98QdD6j9AUkaWaopKb86Ec8NAA3ZFgk6oNxSnvGs0emTfqm3lqpDLCKPPK5gE4ecBz00dIF9mwJE";

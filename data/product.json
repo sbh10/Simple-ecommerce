@@ -1,14 +1,22 @@
 {
-  "id": "produit-001",
-  "name": "T-SHIRT BAZIQ",
-  "description": "T-shirt basique à manches courtes, modèle classique. Un incontournable de la garde-robe.",
-  "basePrice": 29,
-  "currency": " €",
-  "images": ["images/produit-front.png", "images/produit-model.jpg"],
-  "sizes": [
-    { "name": "S", "stock": 10, "priceModifier": 0 },
-    { "name": "M", "stock": 15, "priceModifier": 0 },
-    { "name": "L", "stock": 8, "priceModifier": 3 },
-    { "name": "XL", "stock": 5, "priceModifier": 5 }
+  "products": [
+    {
+      "id": "produit-001",
+      "name": "T-SHIRT BAZIQ",
+      "description": "T-shirt basique à manches courtes, modèle classique. Un incontournable de la garde-robe.",
+      "basePrice": 29,
+      "currency": "€",
+      "images": [
+        "images/produit-front.png",
+        "images/produit-model.png",
+        "images/produit-front-back.png"
+      ],
+      "sizes": [
+        { "name": "S", "stock": 10, "priceModifier": 0 },
+        { "name": "M", "stock": 15, "priceModifier": 0 },
+        { "name": "L", "stock": 8, "priceModifier": 3 },
+        { "name": "XL", "stock": 5, "priceModifier": 5 }
+      ]
+    }
   ]
 }

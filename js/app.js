@@ -4,6 +4,7 @@ class ECommerceApp {
     this.selectedSize = null;
     this.cart = this.loadCart();
     this.init();
+    this.currentImageIndex = 0;
   }
 
   async init() {
@@ -21,8 +22,9 @@ class ECommerceApp {
   async loadProduct() {
     try {
       const response = await fetch("data/product.json");
+      const data = await response.json(); // on lit tout l'objet JSON
+      this.product = data.products[0]; // on extrait le 1er produit du tableau
       console.log("Produit chargé :", this.product);
-      this.product = await response.json();
       this.displayProduct();
     } catch (error) {
       throw new Error("Impossible de charger le produit");
@@ -40,14 +42,37 @@ class ECommerceApp {
       priceEl.textContent = `${this.product.basePrice}${this.product.currency}`;
 
     // Afficher la première image
+    this.currentImageIndex = 0; // ✅ reset
+
     const imageEl = document.getElementById("product-image");
-    if (imageEl instanceof HTMLImageElement && this.product.images.length > 0) {
-      imageEl.src = this.product.images[0];
+    if (imageEl instanceof HTMLImageElement) {
+      imageEl.src = this.product.images[this.currentImageIndex];
       imageEl.alt = this.product.name;
+    }
+
+    // Écouteurs pour les flèches
+    const leftArrow = document.querySelector(".arrow.left");
+    const rightArrow = document.querySelector(".arrow.right");
+
+    if (leftArrow && rightArrow) {
+      leftArrow.addEventListener("click", () => this.changeImage(-1));
+      rightArrow.addEventListener("click", () => this.changeImage(1));
     }
 
     // Générer les options de taille
     this.generateSizeOptions();
+  }
+
+  changeImage(direction) {
+    const total = this.product.images.length;
+    this.currentImageIndex =
+      (this.currentImageIndex + direction + total) % total;
+
+    const imageEl = document.getElementById("product-image");
+    if (imageEl instanceof HTMLImageElement) {
+      imageEl.src = this.product.images[this.currentImageIndex];
+      imageEl.alt = `${this.product.name} image ${this.currentImageIndex + 1}`;
+    }
   }
 
   generateSizeOptions() {
@@ -241,7 +266,10 @@ class ECommerceApp {
   }
 
   showError(message) {
-    this.showError("Oups, il y a un problème.");
+    this.showModal({
+      title: "Erreur",
+      message: message || "Oups, il y a un problème.",
+    });
   }
 
   showSuccess(message) {

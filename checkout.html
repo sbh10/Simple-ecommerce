@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Paiement BaziQ</title>
+    <link rel="stylesheet" href="css/checkout.css" />
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <header class="header-banner">
+      <div class="banner-container">
+        <img src="images/banner2.png" alt="Bannière" />
+      </div>
+      <div class="logo">
+        <img src="images/t-shirt-logo.png" alt="Logo du site" />
+      </div>
+    </header>
+    <h1>PAGE DE PAIEMENT</h1>
+    <div id="order-summary"></div>
+    <div id="paypal-button-container"></div>
+    <button
+      id="stripe-button"
+      style="margin-top: 20px; padding: 10px 20px; font-size: 16px"
+    >
+      Payer avec une carte (Stripe)
+    </button>
+    <script src="js/config.js"></script>
+    <script>
+      const cart = JSON.parse(localStorage.getItem("ecommerce_cart")) || [];
+      const summaryDiv = document.getElementById("order-summary");
+
+      if (cart.length === 0) {
+        summaryDiv.textContent = "Votre panier est vide.";
+      } else {
+        let total = 0;
+        const ul = document.createElement("ul");
+        cart.forEach((item) => {
+          const li = document.createElement("li");
+          const itemTotal = item.price * item.quantity;
+          total += itemTotal;
+          li.textContent = `${item.productName} (Taille ${item.size}) x${item.quantity} : ${itemTotal}€`;
+          ul.appendChild(li);
+        });
+        summaryDiv.appendChild(ul);
+
+        const totalDiv = document.createElement("div");
+        totalDiv.textContent = `Total à payer : ${total.toFixed(2)}€`;
+        summaryDiv.appendChild(totalDiv);
+      }
+
+      // Bouton PayPal
+      let total = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+
+      paypal
+        .Buttons({
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    currency_code: "EUR",
+                    value: total.toFixed(2),
+                  },
+                  description: "Achat sur mon site e-commerce",
+                },
+              ],
+            });
+          },
+          onApprove: (data, actions) => {
+            return actions.order.capture().then((details) => {
+              alert(
+                "Paiement réussi. Merci " + details.payer.name.given_name + "!"
+              );
+              localStorage.removeItem("ecommerce_cart");
+              window.location.href = "success.html";
+            });
+          },
+          onError: (err) => {
+            alert("Erreur lors du paiement : " + err);
+          },
+        })
+        .render("#paypal-button-container");
+
+      // --- Intégration Stripe Checkout ---
+
+      // 4. Initialiser Stripe avec ta clé publique (remplace par ta clé Stripe test)
+      const stripe = Stripe(
+        "pk_test_51RaL4cPrVQeiSsdTbYWPcJ98QdD6j9AUkaWaopKb86Ec8NAA3ZFgk6oNxSnvGs0emTfqm3lqpDLCKPPK5gE4ecBz00dIF9mwJE"
+      );
+
+      // 5. Clic sur bouton Stripe : créer une session checkout sur le serveur
+      document.getElementById("stripe-button").addEventListener("click", () => {
+        const cart = JSON.parse(localStorage.getItem("ecommerce_cart")) || [];
+
+        fetch("stripe/create-checkout-session.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cart),
+        })
+          // .then((res) => res.text())
+          // .then((text) => {
+          //   console.log("Réponse brute du serveur :");
+          //   console.log(text); // Affiche le contenu complet reçu côté serveur
+          // })
+          // .catch((err) => {
+          //   console.error("Erreur fetch :", err);
+          // });
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.id) {
+              stripe.redirectToCheckout({ sessionId: data.id });
+            } else {
+              alert("Erreur : " + data.error);
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

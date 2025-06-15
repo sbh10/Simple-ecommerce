@@ -1,0 +1,5 @@
+<?php
+return [
+    'stripe_secret_key' => 'sk_test_...remplace_par_ta_cle',
+    'stripe_public_key' => 'pk_test_...remplace_par_ta_cle',
+];

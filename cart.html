@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="images\favicon.ico" type="image/x-icon" />
-    <title>Panier E-commerce FACILE</title>
+    <title>Panier BaziQ</title>
   </head>
 
   <body>
@@ -25,23 +25,126 @@
     <div id="cart-items"></div>
 
     <script>
-      const cart = JSON.parse(localStorage.getItem("ecommerce_cart")) || [];
-      const cartItemsDiv = document.getElementById("cart-items");
-      if (cart.length === 0) {
-        cartItemsDiv.textContent = "Le panier est vide.";
-      } else {
+      let cart = JSON.parse(localStorage.getItem("ecommerce_cart")) || [];
+      let productCatalog = {};
+
+      // chargement dynamique du catalogue JSON
+      fetch("data/product.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const productsArray = data.products;
+          productCatalog = {};
+          productsArray.forEach((product) => {
+            productCatalog[product.id] = product;
+          });
+          updateCartDisplay();
+        })
+        .catch((error) => {
+          console.error("Erreur lors du chargement du catalogue :", error);
+          document.getElementById("cart-items").textContent =
+            "Erreur de chargement du panier.";
+        });
+
+      function saveCart() {
+        localStorage.setItem("ecommerce_cart", JSON.stringify(cart));
+      }
+
+      function getStockForItem(item) {
+        const product = productCatalog[item.productId];
+        if (!product) return Infinity;
+        const sizeInfo = product.sizes.find((s) => s.name === item.size);
+        return sizeInfo ? sizeInfo.stock : Infinity;
+      }
+
+      function changeQuantity(index, delta) {
+        const item = cart[index];
+        const maxStock = getStockForItem(item);
+
+        if (delta === 1 && item.quantity >= maxStock) {
+          alert(
+            `Stock limité : maximum ${maxStock} pour la taille ${item.size}.`
+          );
+          return;
+        }
+
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+          cart.splice(index, 1);
+        }
+
+        saveCart();
+        updateCartDisplay();
+      }
+
+      function clearCart() {
+        if (confirm("Voulez-vous vraiment vider votre panier ?")) {
+          cart = [];
+          saveCart();
+          updateCartDisplay();
+        }
+      }
+
+      function updateCartDisplay() {
+        const cartItemsDiv = document.getElementById("cart-items");
+        cartItemsDiv.innerHTML = "";
+
+        if (cart.length > 0) {
+          const clearBtn = document.createElement("button");
+          clearBtn.className = "clear-cart-btn";
+          clearBtn.textContent = "Vider le panier";
+          clearBtn.onclick = clearCart;
+          cartItemsDiv.appendChild(clearBtn);
+        }
+
+        if (cart.length === 0) {
+          cartItemsDiv.textContent = "Le panier est vide.";
+          return;
+        }
+
         let total = 0;
-        cart.forEach((item) => {
+
+        cart.forEach((item, index) => {
+          const product = productCatalog[item.productId];
+          const imageUrl = product?.images?.[0] || "placeholder.jpg";
           const itemTotal = item.price * item.quantity;
           total += itemTotal;
+
           const itemDiv = document.createElement("div");
-          itemDiv.textContent = `${item.productName} - Taille ${item.size} | Quantité: ${item.quantity} x ${item.price}€ = ${itemTotal}€`;
+          itemDiv.className = "cart-item";
+
+          itemDiv.innerHTML = `
+          <img src="${imageUrl}" alt="${item.productName}">
+          <div class="cart-info">
+            <h3>${item.productName}</h3>
+            <p>Taille: ${item.size}</p>
+            <p>Prix unitaire: ${item.price}€</p>
+            <p>Total: ${itemTotal}€</p>
+          </div>
+          <div class="cart-qty">
+            <button onclick="changeQuantity(${index}, -1)">-</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity(${index}, 1)">+</button>
+          </div>
+        `;
+
           cartItemsDiv.appendChild(itemDiv);
         });
+
         const totalDiv = document.createElement("div");
-        totalDiv.textContent = `TOTAL: ${total}€`;
+        totalDiv.className = "cart-total";
+        totalDiv.innerHTML = `TOTAL: ${total}€`;
         cartItemsDiv.appendChild(totalDiv);
+
+        const payBtn = document.createElement("button");
+        payBtn.textContent = "Payer";
+        payBtn.className = "pay-button";
+        payBtn.onclick = () => {
+          // Rediriger vers la page de paiement
+          window.location.href = "checkout.html";
+        };
+        cartItemsDiv.appendChild(payBtn);
       }
     </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
   </body>
 </html>
