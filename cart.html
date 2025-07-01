@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +15,9 @@
   <body>
     <header class="header-banner">
       <div class="banner-container">
-        <img src="images/banner2.png" alt="Bannière" />
+        <a href="index.html">
+          <img src="images/banner2.png" alt="Bannière" />
+        </a>
       </div>
       <div class="logo">
         <img src="images/t-shirt-logo.png" alt="Logo du site" />
@@ -136,7 +138,7 @@
         cartItemsDiv.appendChild(totalDiv);
 
         const payBtn = document.createElement("button");
-        payBtn.textContent = "Payer";
+        payBtn.textContent = "Passer commande";
         payBtn.className = "pay-button";
         payBtn.onclick = () => {
           // Rediriger vers la page de paiement

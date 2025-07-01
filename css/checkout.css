@@ -17,6 +17,10 @@
   margin-bottom: 16px;
 }
 
+.banner-container a {
+  cursor: pointer;
+}
+
 .banner-container img {
   max-width: 100%;
   height: auto;
@@ -43,4 +47,75 @@ h1 {
   font-size: 2.2rem;
   font-weight: bold;
   color: #222;
+}
+
+#order-summary {
+  max-width: 400px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  color: #222;
+}
+
+#order-summary ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+
+#order-summary li {
+  border-bottom: 1px solid #eee;
+  padding: 6px 0;
+  font-size: 1rem;
+}
+
+#order-summary div {
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: right;
+}
+
+#stripe-button {
+  display: block;
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #ad1452;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  /* padding: 14px 0; */
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(212, 84, 182, 0.4);
+  transition: background-color 0.3s ease;
+}
+
+#paypal-button-container {
+  max-width: 230px;
+  margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 600px) {
+  .header-banner {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  .banner-container img {
+    max-height: 90px;
+  }
+  .logo img {
+    height: 60px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
 }
