@@ -73,23 +73,23 @@ nav ul li a:hover {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .product-card {
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  padding: 30px;
-  margin-top: 20px;
-}
-
-.product-images {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  max-width: 1200px;
 }
 
+.product-image {
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
 .arrow {
   background: none;
   border: none;
@@ -109,14 +109,6 @@ nav ul li a:hover {
   display: flex;
   justify-content: center;
   gap: 20px;
-}
-
-.product-images img {
-  max-width: 100%;
-  height: auto;
-  width: auto;
-  border-radius: 8px;
-  object-fit: cover;
 }
 
 .product-info {
@@ -189,26 +181,25 @@ button {
   font-weight: bold;
   border: none;
   cursor: pointer;
-  width: 200px; /* ➕ fixer une largeur identique */
-  max-width: 200px; /* ➕ pour sécurité responsive */
-  min-width: 200px; /* ➕ garantit la cohérence */
-  box-sizing: border-box; /* ➕ inclut le padding dans la largeur */
-  margin: 10px auto; /* ➕ centré */
+  width: 200px;
+  min-width: 200px;
+  box-sizing: border-box;
+  margin: 10px auto;
   display: block;
   text-align: center;
 }
 
-#add-to-cart {
+.add-to-cart {
   background: rgba(173, 20, 82, 0.6);
   color: white;
 }
 
-#add-to-cart:hover:not(:disabled) {
+.add-to-cart:hover:not(:disabled) {
   background: #ad1452;
   transform: translateY(-2px);
 }
 
-#add-to-cart:disabled {
+.add-to-cart:disabled {
   background: #4a4a4a;
   cursor: not-allowed;
   transform: none;

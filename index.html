@@ -9,7 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="images\favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <nav class="nav-container">
@@ -21,7 +21,7 @@
       </ul>
 
       <div class="logo" aria-label="Logo">
-        <img src="images\t-shirt-logo.png" alt="Logo du site" />
+        <img src="images/t-shirt-logo.png" alt="Logo du site" />
       </div>
 
       <ul class="nav-right">
@@ -31,51 +31,11 @@
     </nav>
 
     <div class="banner-container">
-      <img src="images\banner2.png" alt="bannière" />
+      <img src="images/banner2.png" alt="bannière" />
     </div>
 
     <div class="container">
-      <div class="product-card">
-        <div class="product-images">
-          <img
-            id="product-image"
-            src="images\produit-model.png"
-            alt="Produit"
-          />
-          <div class="arrows">
-            <button class="arrow left">&#10094;</button>
-            <button class="arrow right">&#10095;</button>
-          </div>
-          <img
-            id="product-thumb"
-            alt=""
-            style="max-width: 100px; cursor: pointer"
-          />
-        </div>
-
-        <div class="product-info">
-          <h1 id="product-name">Chargement...</h1>
-          <p id="product-description"></p>
-
-          <div class="price-display">
-            <span id="product-price">0€</span>
-          </div>
-
-          <div class="size-selector">
-            <label for="sizes">Taille :</label>
-            <select id="sizes">
-              <option value="">Choisir une taille</option>
-            </select>
-          </div>
-
-          <button id="add-to-cart" disabled>Ajouter au panier</button>
-
-          <div id="cart-info" style="display: none">
-            <p>Panier : <span id="cart-count">0</span> article(s)</p>
-            <button id="view-cart">Voir le panier</button>
-          </div>
-        </div>
-      </div>
+      <div id="product-list"></div>
     </div>
 
     <div id="custom-modal" class="modal">

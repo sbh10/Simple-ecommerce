@@ -17,6 +17,34 @@
         { "name": "L", "stock": 8, "priceModifier": 3 },
         { "name": "XL", "stock": 5, "priceModifier": 5 }
       ]
+    },
+    {
+      "id": "produit-002",
+      "name": "JEAN CLASSIC FIT",
+      "description": "Jean large en denim bleu foncé. Parfait pour un look décontracté ou habillé.",
+      "basePrice": 59,
+      "currency": "€",
+      "images": ["images/jeans-front.png", "images/jeans-side.png"],
+      "sizes": [
+        { "name": "S", "stock": 6, "priceModifier": 0 },
+        { "name": "M", "stock": 12, "priceModifier": 2 },
+        { "name": "L", "stock": 10, "priceModifier": 4 },
+        { "name": "XL", "stock": 4, "priceModifier": 6 }
+      ]
+    },
+    {
+      "id": "produit-003",
+      "name": "SWEAT À CAPUCHE URBAN",
+      "description": "Sweat à capuche confortable avec poches kangourou. Idéal pour les journées fraîches.",
+      "basePrice": 45,
+      "currency": "€",
+      "images": ["images/sweatshirt-front.png", "images/sweatshirt-back.png"],
+      "sizes": [
+        { "name": "S", "stock": 7, "priceModifier": 0 },
+        { "name": "M", "stock": 10, "priceModifier": 2 },
+        { "name": "L", "stock": 6, "priceModifier": 4 },
+        { "name": "XL", "stock": 3, "priceModifier": 5 }
+      ]
     }
   ]
 }
